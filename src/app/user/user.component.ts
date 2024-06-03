@@ -16,7 +16,6 @@ export class UserComponent {
   // selectedUser = signal(DUMMY_USERS[randomUserIndex]);
   // imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar)
 
-
   get imagePath() {
     return 'assets/users/' + this.selectedUser.avatar;
   }
@@ -27,6 +26,5 @@ export class UserComponent {
 
     // Signals:
     // this.selectedUser.set(DUMMY_USERS[newRandomIndex]);
-
   }
 }
