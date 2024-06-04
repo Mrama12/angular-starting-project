@@ -14,7 +14,7 @@ import { DUMMY_USERS } from './dummy-users';
 
 export class AppComponent {
   users = DUMMY_USERS;
-  selectedName = '';
+  selectedName?: string;
 
   onSelectUser(name: string) {
     this.selectedName = name;

@@ -2,30 +2,18 @@
 
 <main>
   <ul id="users">
-    <li>
-      <app-user
-        [id]="users[0].id" 
-        [avatar]="users[0].avatar" 
-        [name]="users[0].name"
-        (selectAction)="onSelectUser($event)"
-      />
-    </li>
-    <li>
-      <app-user
-        [id]="users[1].id"
-        [avatar]="users[1].avatar"
-        [name]="users[1].name"
-        (selectAction)="onSelectUser($event)"
-      />
-    </li>
-    <li>
-      <app-user
-        [id]="users[3].id"
-        [avatar]="users[3].avatar"
-        [name]="users[3].name"
-        (selectAction)="onSelectUser($event)"
-      />
-    </li>
+    @for (user of users; track user.id) {
+      <li>
+        <app-user
+          [user]="user" 
+          (selectAction)="onSelectUser($event)"
+        />
+      </li>
+    }
   </ul>
-  <app-tasks [userName]=selectedName></app-tasks>
+  @if (selectedName) {
+    <app-tasks [userName]=selectedName></app-tasks>
+  } @else {
+    <p>Select an user to see their tasks</p>
+  }
 </main>

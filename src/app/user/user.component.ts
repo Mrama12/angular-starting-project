@@ -1,5 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+// type User = {
+//   id: string,
+//   name: string,
+//   avatar: string,
+// };
+
+interface User {
+  id: string,
+  name: string,
+  avatar: string,
+};
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -8,9 +20,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 
 export class UserComponent {
-  @Input({required: true}) id!: string;
-  @Input({required: true}) avatar!: string;
-  @Input({required: true}) name!: string;
+  @Input({required: true}) user!: User; 
   @Output() selectAction = new EventEmitter<string>();
   
   // Modern signals (adding input & output)
@@ -19,10 +29,10 @@ export class UserComponent {
   // select = output<string>();
 
   get imagePath() {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.user.avatar;
   }
 
   onSelectedUser() {
-    this.selectAction.emit(this.name);
+    this.selectAction.emit(this.user.name);
   }
 }
