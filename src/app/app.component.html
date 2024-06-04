@@ -7,7 +7,7 @@
         [id]="users[0].id" 
         [avatar]="users[0].avatar" 
         [name]="users[0].name"
-        (select)="onSelectUser($event)"
+        (selectAction)="onSelectUser($event)"
       />
     </li>
     <li>
@@ -15,7 +15,7 @@
         [id]="users[1].id"
         [avatar]="users[1].avatar"
         [name]="users[1].name"
-        (select)="onSelectUser($event)"
+        (selectAction)="onSelectUser($event)"
       />
     </li>
     <li>
@@ -23,8 +23,9 @@
         [id]="users[3].id"
         [avatar]="users[3].avatar"
         [name]="users[3].name"
-        (select)="onSelectUser($event)"
+        (selectAction)="onSelectUser($event)"
       />
     </li>
   </ul>
+  <app-tasks [userName]=selectedName></app-tasks>
 </main>

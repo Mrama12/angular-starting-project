@@ -11,7 +11,7 @@ export class UserComponent {
   @Input({required: true}) id!: string;
   @Input({required: true}) avatar!: string;
   @Input({required: true}) name!: string;
-  @Output() select = new EventEmitter<string>();
+  @Output() selectAction = new EventEmitter<string>();
   
   // Modern signals (adding input & output)
   // avatar = input.required<string>();
@@ -23,6 +23,6 @@ export class UserComponent {
   }
 
   onSelectedUser() {
-    this.select.emit(this.id);
+    this.selectAction.emit(this.name);
   }
 }
