@@ -3,6 +3,7 @@
 <main>
   <ul id="users">
     @for (user of users; track user.id) {
+      <!-- Before angular 17 <li *ngFor="let user of users"> -->
       <li>
         <app-user
           [user]="user" 
