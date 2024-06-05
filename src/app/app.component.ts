@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { DUMMY_USERS } from './dummy-users';
+import { DUMMY_TASKS } from './dummy-tasks';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,22 @@ import { DUMMY_USERS } from './dummy-users';
 
 export class AppComponent {
   users = DUMMY_USERS;
-  selectedName?: string;
+  tasks = DUMMY_TASKS;
+  selectedId?: string;
 
-  onSelectUser(name: string) {
-    this.selectedName = name;
+  get selectedUser () {
+    return this.users.find((user) => {
+      return user.id === this.selectedId
+    })
+  }
+
+  onSelectUser(id: string) {
+    this.selectedId = id;
+  }
+
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => {
+      return task.userId === this.selectedUser?.id;
+    })
   }
 }

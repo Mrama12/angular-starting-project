@@ -2,8 +2,11 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
 
 interface Task {
-  id: number,
-  taskName: string,
+  id: string,
+  userId?: string,
+  title: string,
+  summary?: string,
+  dueDate?: string,
 }
 
 @Component({
@@ -15,13 +18,15 @@ interface Task {
 })
 export class TasksComponent {
   @Input({required: true}) userName!: string;
-  tasks: Task[] = [];
+  @Input() userTasks!: Task[] | undefined;
+
+  // tasks: Task[] = [];
 
   addNewTask() {
     console.log('New task!');
-    this.tasks.push({
-      id: this.tasks.length,
-      taskName: 'new task ' + this.tasks.length
-    });
+    // this.tasks.push({
+    //   id: 'task 1',
+    //   title: 'new task ' + this.tasks.length,
+    // });
   }
 }

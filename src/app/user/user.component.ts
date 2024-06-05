@@ -33,6 +33,6 @@ export class UserComponent {
   }
 
   onSelectedUser() {
-    this.selectAction.emit(this.user.name);
+    this.selectAction.emit(this.user.id);
   }
 }
