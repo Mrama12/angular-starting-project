@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
-import { type Task } from './task/task.model';
+import { type Task, type NewTask } from './task/task.model';
 
 
 @Component({
@@ -15,7 +15,9 @@ export class TasksComponent {
   @Input({required: true}) userName!: string;
   @Input() userTasks!: Task[];
   @Output() completeTask = new EventEmitter<string>();
-  isAddingTask: boolean = false;
+  @Output() addTask = new EventEmitter<NewTask>();
+
+  isAddingTask = false;
 
   addNewTask() {
     this.isAddingTask = !this.isAddingTask;
@@ -26,6 +28,11 @@ export class TasksComponent {
   }
 
   onCancelTask() {
+    this.isAddingTask = false;
+  }
+
+  onAddTask(taskData: NewTask) {
+    this.addTask.emit(taskData);
     this.isAddingTask = false;
   }
 }

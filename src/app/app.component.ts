@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { type Task, type NewTask } from './tasks/task/task.model';
+
 import { DUMMY_USERS } from './dummy-users';
 import { DUMMY_TASKS } from './dummy-tasks';
 
@@ -17,7 +19,7 @@ import { DUMMY_TASKS } from './dummy-tasks';
 
 export class AppComponent {
   users = DUMMY_USERS;
-  tasks = DUMMY_TASKS;
+  tasks: Task[] = DUMMY_TASKS;
   selectedId?: string;
 
   get selectedUser () {
@@ -34,6 +36,17 @@ export class AppComponent {
     this.tasks = this.tasks.filter((task) => {
       return id !== task.id;
     });
+  }
+
+  onAddTask(taskData: NewTask) {
+    const addingTask: Task = {
+      title: taskData.title,
+      summary: taskData.summary,
+      dueDate: taskData.dueDate,
+      userId: this.selectedId,
+      id: 't' + (this.tasks.length + 1),
+    }
+    this.tasks.unshift(addingTask);
   }
 
   get selectedUserTasks() {

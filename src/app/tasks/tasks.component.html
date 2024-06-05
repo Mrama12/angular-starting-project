@@ -7,7 +7,8 @@
     </menu>
   </header>
   @if (isAddingTask) {
-    <app-new-task-form (cancelTask)="onCancelTask()"></app-new-task-form>
+    <app-new-task-form (cancelTask)="onCancelTask()"
+      (addTask)="onAddTask($event)"></app-new-task-form>
   }
   <ul>
     @for (userTask of userTasks; track userTask.id) {
