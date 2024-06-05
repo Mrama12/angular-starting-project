@@ -30,6 +30,16 @@ export class AppComponent {
     this.selectedId = id;
   }
 
+  onCompleteTask(id: string) {
+    console.log('aux onCompleteTask:', id);
+    console.log('aux this.tasks:', this.tasks);
+    this.tasks = this.tasks.filter((task) => {
+      console.log('aux id !== task.id:', id !== task.id);
+      return id !== task.id;
+    });
+    console.log('aux this.tasks:', this.tasks);
+  }
+
   get selectedUserTasks() {
     return this.tasks.filter((task) => {
       return task.userId === this.selectedUser?.id;

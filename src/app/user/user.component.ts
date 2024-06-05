@@ -9,7 +9,8 @@ import { type User } from './user.model'
 })
 
 export class UserComponent {
-  @Input({required: true}) user!: User; 
+  @Input({required: true}) user!: User;
+  @Input({required: true}) isSelected!: boolean;
   @Output() selectAction = new EventEmitter<string>();
   
   // Modern signals (adding input & output)

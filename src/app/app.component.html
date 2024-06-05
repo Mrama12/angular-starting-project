@@ -7,6 +7,7 @@
       <li>
         <app-user
           [user]="user" 
+          [isSelected]="selectedUser?.id === user.id"
           (selectAction)="onSelectUser($event)"
         />
       </li>
@@ -14,6 +15,7 @@
   </ul>
   @if (selectedUser) {
     <app-tasks [userName]=selectedUser.name
+            (completeTask)="onCompleteTask($event)"
             [userTasks]="selectedUserTasks"></app-tasks>
   } @else {
     <p>Select an user to see their tasks</p>
