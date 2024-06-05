@@ -31,13 +31,9 @@ export class AppComponent {
   }
 
   onCompleteTask(id: string) {
-    console.log('aux onCompleteTask:', id);
-    console.log('aux this.tasks:', this.tasks);
     this.tasks = this.tasks.filter((task) => {
-      console.log('aux id !== task.id:', id !== task.id);
       return id !== task.id;
     });
-    console.log('aux this.tasks:', this.tasks);
   }
 
   get selectedUserTasks() {

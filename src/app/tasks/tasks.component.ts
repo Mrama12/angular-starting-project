@@ -15,7 +15,7 @@ export class TasksComponent {
   @Input({required: true}) userName!: string;
   @Input() userTasks!: Task[];
   @Output() completeTask = new EventEmitter<string>();
-  isAddingTask = false;
+  isAddingTask: boolean = false;
 
   addNewTask() {
     this.isAddingTask = !this.isAddingTask;
@@ -23,5 +23,9 @@ export class TasksComponent {
 
   onCompleteTask(id: string) {
     this.completeTask.emit(id);
+  }
+
+  onCancelTask() {
+    this.isAddingTask = false;
   }
 }
