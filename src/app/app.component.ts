@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { type Task, type NewTask } from './tasks/task/task.model';
+import { TasksService } from './tasks/tasks.service';
 
 import { DUMMY_USERS } from './dummy-users';
 import { DUMMY_TASKS } from './dummy-tasks';
@@ -20,7 +21,10 @@ import { DUMMY_TASKS } from './dummy-tasks';
 export class AppComponent {
   users = DUMMY_USERS;
   tasks: Task[] = DUMMY_TASKS;
-  selectedId?: string;
+  selectedId = '';
+
+  constructor(private tasksService: TasksService) {
+  }
 
   get selectedUser () {
     return this.users.find((user) => {
@@ -33,20 +37,11 @@ export class AppComponent {
   }
 
   onCompleteTask(id: string) {
-    this.tasks = this.tasks.filter((task) => {
-      return id !== task.id;
-    });
+    this.tasks = this.tasksService.removeTask(id, this.tasks);
   }
 
   onAddTask(taskData: NewTask) {
-    const addingTask: Task = {
-      title: taskData.title,
-      summary: taskData.summary,
-      dueDate: taskData.dueDate,
-      userId: this.selectedId,
-      id: 't' + (this.tasks.length + 1),
-    }
-    this.tasks.unshift(addingTask);
+    this.tasks = this.tasksService.addTask(taskData, this.tasks, this.selectedId);
   }
 
   get selectedUserTasks() {
