@@ -5,10 +5,8 @@ import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { type Task, type NewTask } from './tasks/task/task.model';
-import { TasksService } from './tasks/tasks.service';
 
 import { DUMMY_USERS } from './dummy-users';
-import { DUMMY_TASKS } from './dummy-tasks';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +18,7 @@ import { DUMMY_TASKS } from './dummy-tasks';
 
 export class AppComponent {
   users = DUMMY_USERS;
-  tasks: Task[] = DUMMY_TASKS;
   selectedId = '';
-
-  constructor(private tasksService: TasksService) {
-  }
 
   get selectedUser () {
     return this.users.find((user) => {
@@ -34,19 +28,5 @@ export class AppComponent {
 
   onSelectUser(id: string) {
     this.selectedId = id;
-  }
-
-  onCompleteTask(id: string) {
-    this.tasks = this.tasksService.removeTask(id, this.tasks);
-  }
-
-  onAddTask(taskData: NewTask) {
-    this.tasks = this.tasksService.addTask(taskData, this.tasks, this.selectedId);
-  }
-
-  get selectedUserTasks() {
-    return this.tasks.filter((task) => {
-      return task.userId === this.selectedUser?.id;
-    })
   }
 }

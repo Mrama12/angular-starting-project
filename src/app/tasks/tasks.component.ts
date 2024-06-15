@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
 import { type Task, type NewTask } from './task/task.model';
-
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,9 +13,10 @@ import { type Task, type NewTask } from './task/task.model';
 })
 export class TasksComponent {
   @Input({required: true}) userName!: string;
-  @Input() userTasks!: Task[];
-  @Output() completeTask = new EventEmitter<string>();
-  @Output() addTask = new EventEmitter<NewTask>();
+  @Input({required: true}) userId!: string;
+
+  constructor(private tasksService: TasksService) {
+  }
 
   isAddingTask = false;
 
@@ -23,8 +24,8 @@ export class TasksComponent {
     this.isAddingTask = !this.isAddingTask;
   }
 
-  onCompleteTask(id: string) {
-    this.completeTask.emit(id);
+  onCompleteTask(taskId: string) {
+    this.tasksService.removeTask(taskId);
   }
 
   onCancelTask() {
@@ -32,7 +33,11 @@ export class TasksComponent {
   }
 
   onAddTask(taskData: NewTask) {
-    this.addTask.emit(taskData);
+    this.tasksService.addTask(taskData, this.userId);
     this.isAddingTask = false;
+  }
+
+  get selectedUserTasks() {
+    return this.tasksService.getUserTasks(this.userId);
   }
 }

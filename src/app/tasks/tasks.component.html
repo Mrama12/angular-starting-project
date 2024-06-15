@@ -11,7 +11,7 @@
       (addTask)="onAddTask($event)"></app-new-task-form>
   }
   <ul>
-    @for (userTask of userTasks; track userTask.id) {
+    @for (userTask of selectedUserTasks; track userTask.id) {
       <li>
         <app-task [task]=userTask
           (completeTask)="onCompleteTask($event)"></app-task>
