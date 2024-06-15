@@ -8,6 +8,17 @@ export class TasksService {
 
   tasks: Task[] = DUMMY_TASKS;
 
+  constructor() {
+    const storageTasks = localStorage.getItem('tasks');
+    if (storageTasks) {
+      this.tasks = JSON.parse(storageTasks);
+    }
+  }
+
+  private saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
+  }
+
   addTask(taskData: NewTask, selectedId: string) {
     const addingTask: Task = {
       title: taskData.title,
@@ -17,12 +28,14 @@ export class TasksService {
       id: 't' + (this.tasks.length + 1),
     }
     this.tasks.unshift(addingTask);
+    this.saveTasks();
   }
 
   removeTask(taskId: string) {
     this.tasks = this.tasks.filter((task) => {
       return taskId !== task.id;
     });
+    this.saveTasks();
   }
 
   getUserTasks(userId: string) {
