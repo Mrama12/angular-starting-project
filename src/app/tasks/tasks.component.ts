@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskFormComponent } from './new-task-form/new-task-form.component';
-import { type Task, type NewTask } from './task/task.model';
 import { TasksService } from './tasks.service';
 
 @Component({
@@ -28,12 +27,7 @@ export class TasksComponent {
     this.tasksService.removeTask(taskId);
   }
 
-  onCancelTask() {
-    this.isAddingTask = false;
-  }
-
-  onAddTask(taskData: NewTask) {
-    this.tasksService.addTask(taskData, this.userId);
+  onCloseForm() {
     this.isAddingTask = false;
   }
 
